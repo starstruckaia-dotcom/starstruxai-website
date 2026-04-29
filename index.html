@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STARSTRUX AI — AI Automation for Property Management</title>
+<meta name="description" content="STARSTRUX AI builds custom AI automation systems for property management firms in Ottawa — eliminating manual work across utility bills, maintenance, AP processing, and owner reporting. We build it, integrate it, and train your team.">
+<meta property="og:title" content="STARSTRUX AI — AI Automation for Property Management">
+<meta property="og:description" content="We cut an Ottawa PM firm's utility bill processing from 8 hours to 20 minutes. Book a free strategy call to see what we'd automate for your firm.">
+<meta property="og:url" content="https://starstruxai.com">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="STARSTRUX AI — AI Automation for Property Management">
+<meta name="twitter:description" content="Custom AI automation for property management firms. 8 hours → 20 minutes. Book a free strategy call."
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dark:       #08090F;
+    --dark-2:     #0C0E18;
+    --dark-3:     #10121E;
+    --dark-card:  rgba(255,255,255,0.03);
+    --gold:       #C9973A;
+    --gold-hi:    #E0B05A;
+    --gold-dim:   rgba(201,151,58,0.13);
+    --gold-line:  rgba(201,151,58,0.2);
+    --white:      #F7F4EE;
+    --muted:      rgba(247,244,238,0.5);
+    --muted-2:    rgba(247,244,238,0.3);
+    --light-bg:   #F8F6F1;
+    --light-card: #FFFFFF;
+    --text-dark:  #1C1A16;
+    --text-mid:   #5A5650;
+    --border-l:   rgba(0,0,0,0.07);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--dark); color: var(--white); -webkit-font-smoothing: antialiased; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 5%;
+    background: rgba(8,9,15,0.9);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--gold-line);
+  }
+  .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; letter-spacing: 0.1em; color: var(--white); text-decoration: none; }
+  .logo span { color: var(--gold); }
+  .nav-r { display: flex; align-items: center; gap: 2rem; }
+  .nav-r a { font-size: 0.82rem; color: var(--muted); text-decoration: none; font-weight: 500; transition: color .2s; }
+  .nav-r a:hover { color: var(--white); }
+  .btn { display: inline-block; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif; cursor: pointer; border: none; transition: all .2s; }
+  .btn-gold { background: var(--gold); color: #100C02; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.03em; border-radius: 4px; padding: .6rem 1.35rem; }
+  .btn-gold:hover { background: var(--gold-hi); transform: translateY(-1px); }
+  .btn-gold-lg { background: var(--gold); color: #100C02; font-weight: 700; font-size: 1rem; letter-spacing: 0.03em; border-radius: 5px; padding: .9rem 2.25rem; }
+  .btn-gold-lg:hover { background: var(--gold-hi); transform: translateY(-2px); }
+  .btn-ghost { background: transparent; color: var(--white); font-weight: 500; font-size: 0.95rem; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; padding: .85rem 1.75rem; }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+    padding: 10rem 5% 6rem; position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(201,151,58,.04) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(201,151,58,.04) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 90% 80% at 40% 50%, black 20%, transparent 100%);
+  }
+  .hero-glow { position: absolute; top: -5%; left: 5%; width: 65%; height: 55%; background: radial-gradient(ellipse, rgba(201,151,58,.065) 0%, transparent 70%); pointer-events: none; }
+  .pill { display: inline-flex; align-items: center; gap: .5rem; background: var(--gold-dim); border: 1px solid var(--gold-line); border-radius: 100px; padding: .38rem 1rem; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; width: fit-content; }
+  .pill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: blink 2s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+  h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.8rem, 6vw, 5.2rem); line-height: 1.03; letter-spacing: -.025em; color: var(--white); max-width: 820px; margin-bottom: 1.6rem; }
+  h1 em { font-style: normal; color: var(--gold); }
+  .hero-sub { font-size: 1.05rem; line-height: 1.75; color: var(--muted); max-width: 560px; margin-bottom: 2.5rem; }
+  .hero-ctas { display: flex; align-items: center; gap: 1.1rem; flex-wrap: wrap; margin-bottom: 4rem; }
+
+  .proof-bar {
+    display: flex; gap: 0; border: 1px solid var(--gold-line); border-radius: 8px; overflow: hidden; max-width: 700px;
+    background: rgba(201,151,58,.04);
+  }
+  .proof-item { flex: 1; padding: 1.25rem 1.5rem; border-right: 1px solid var(--gold-line); }
+  .proof-item:last-child { border-right: none; }
+  .proof-num { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--gold); line-height: 1; }
+  .proof-label { font-size: .75rem; color: var(--muted); margin-top: .3rem; line-height: 1.4; }
+
+  /* ─── SECTION COMMON ─── */
+  .eyebrow { font-size: .7rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); margin-bottom: .85rem; }
+  h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(1.65rem, 3.5vw, 2.5rem); line-height: 1.15; letter-spacing: -.015em; margin-bottom: .9rem; }
+  .sec-sub { font-size: 1rem; line-height: 1.7; max-width: 520px; margin-bottom: 3rem; }
+
+  /* ─── PROOF SECTION ─── */
+  .proof-section { background: var(--dark-2); padding: 5.5rem 5%; border-top: 1px solid var(--gold-line); border-bottom: 1px solid var(--gold-line); }
+  .proof-story {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; max-width: 1100px; margin: 0 auto;
+  }
+  .proof-label-tag { display: inline-block; background: var(--gold-dim); border: 1px solid var(--gold-line); border-radius: 4px; padding: .25rem .75rem; font-size: .7rem; font-weight: 700; letter-spacing: .08em; color: var(--gold); margin-bottom: 1.25rem; text-transform: uppercase; }
+  .proof-headline { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.65rem; color: var(--white); line-height: 1.2; margin-bottom: 1rem; }
+  .proof-body { font-size: .92rem; color: var(--muted); line-height: 1.75; margin-bottom: 1.5rem; }
+  .proof-stack { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .tag { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 4px; padding: .2rem .65rem; font-size: .72rem; color: var(--muted); }
+  .before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .ba-card { background: var(--dark-card); border: 1px solid var(--gold-line); border-radius: 8px; padding: 1.5rem; }
+  .ba-card.after { border-color: rgba(201,151,58,.4); }
+  .ba-label { font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted-2); margin-bottom: 1rem; }
+  .ba-label.gold { color: var(--gold); }
+  .ba-stat { font-family: 'Syne', sans-serif; font-size: 2.4rem; font-weight: 800; color: var(--white); line-height: 1; margin-bottom: .3rem; }
+  .ba-stat.gold { color: var(--gold); }
+  .ba-desc { font-size: .8rem; color: var(--muted); line-height: 1.5; }
+  .ba-items { display: flex; flex-direction: column; gap: .5rem; margin-top: .75rem; }
+  .ba-item { font-size: .8rem; color: var(--muted); display: flex; gap: .5rem; align-items: flex-start; line-height: 1.4; }
+  .ba-item::before { content: '→'; color: var(--gold); flex-shrink: 0; }
+
+  /* ─── SERVICES ─── */
+  .services { background: var(--light-bg); padding: 7rem 5%; }
+  .services h2 { color: var(--text-dark); }
+  .services .sec-sub { color: var(--text-mid); }
+  .services .eyebrow { color: #8B6520; }
+  .svc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem; }
+  .svc-card { background: var(--light-card); border: 1px solid var(--border-l); border-radius: 10px; padding: 1.75rem; transition: transform .2s, box-shadow .2s; position: relative; }
+  .svc-card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,.09); }
+  .svc-card.flagship { border-color: #C9973A; border-width: 1.5px; }
+  .flagship-tag { position: absolute; top: -11px; left: 1.5rem; background: var(--gold); color: #100C02; font-size: .65rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: .2rem .7rem; border-radius: 4px; }
+  .svc-num { font-family: 'Syne', sans-serif; font-size: .7rem; font-weight: 700; letter-spacing: .1em; color: #8B6520; margin-bottom: .9rem; }
+  .svc-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--text-dark); margin-bottom: .6rem; }
+  .svc-desc { font-size: .875rem; color: var(--text-mid); line-height: 1.65; margin-bottom: 1.25rem; }
+  .svc-list { list-style: none; display: flex; flex-direction: column; gap: .45rem; }
+  .svc-list li { font-size: .8rem; color: var(--text-mid); display: flex; gap: .45rem; line-height: 1.45; }
+  .svc-list li::before { content: '›'; color: #C9973A; font-weight: 700; flex-shrink: 0; }
+  .svc-integrations { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: 1.25rem; padding-top: 1.1rem; border-top: 1px solid var(--border-l); }
+  .svc-int-tag { background: #F0EBE0; color: #6B5420; font-size: .68rem; font-weight: 600; padding: .18rem .6rem; border-radius: 4px; }
+
+  /* ─── HOW ─── */
+  .how { background: var(--dark-3); padding: 7rem 5%; border-top: 1px solid var(--gold-line); }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2.5rem; margin-top: 3.5rem; }
+  .step-n { font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800; color: rgba(201,151,58,.1); line-height: 1; margin-bottom: .85rem; }
+  .step-pill { display: inline-block; background: var(--gold-dim); border: 1px solid var(--gold-line); border-radius: 4px; padding: .22rem .65rem; font-size: .68rem; font-weight: 700; letter-spacing: .08em; color: var(--gold); margin-bottom: .85rem; }
+  .step-title { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 1.05rem; color: var(--white); margin-bottom: .65rem; }
+  .step-body { font-size: .875rem; color: var(--muted); line-height: 1.7; }
+
+  /* ─── PRICING ─── */
+  .pricing { background: var(--dark-2); padding: 7rem 5%; border-top: 1px solid var(--gold-line); }
+  .price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; max-width: 900px; }
+  .price-card { border: 1px solid var(--gold-line); border-radius: 10px; padding: 2rem 1.75rem; background: var(--dark-card); }
+  .price-card.featured { border-color: rgba(201,151,58,.5); background: rgba(201,151,58,.04); }
+  .price-tier { font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: .75rem; }
+  .price-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.3rem; color: var(--white); margin-bottom: .4rem; }
+  .price-units { font-size: .8rem; color: var(--muted); margin-bottom: 1.5rem; }
+  .price-amount { font-family: 'Syne', sans-serif; font-size: 2.5rem; font-weight: 800; color: var(--white); line-height: 1; }
+  .price-period { font-size: .85rem; color: var(--muted); }
+  .price-build { font-size: .82rem; color: var(--muted); margin: .5rem 0 1.5rem; padding: .5rem .75rem; background: rgba(255,255,255,.04); border-radius: 5px; border: 1px solid rgba(255,255,255,.07); }
+  .price-features { list-style: none; display: flex; flex-direction: column; gap: .55rem; margin-bottom: 1.75rem; }
+  .price-features li { font-size: .82rem; color: var(--muted); display: flex; gap: .5rem; }
+  .price-features li::before { content: '✓'; color: var(--gold); flex-shrink: 0; font-weight: 700; }
+  .price-roi { font-size: .78rem; color: var(--gold); background: var(--gold-dim); border: 1px solid var(--gold-line); border-radius: 5px; padding: .55rem .85rem; margin-top: auto; line-height: 1.5; }
+
+  /* ─── PROBLEMS ─── */
+  .problems { background: var(--dark); padding: 6rem 5%; border-top: 1px solid var(--gold-line); border-bottom: 1px solid var(--gold-line); }
+  .prob-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.1rem; margin-top: 3rem; }
+  .prob-card { background: var(--dark-card); border: 1px solid var(--gold-line); border-radius: 8px; padding: 1.6rem; position: relative; overflow: hidden; }
+  .prob-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--gold) 0%, transparent 60%); }
+  .prob-icon { font-size: 1.2rem; margin-bottom: 1rem; }
+  .prob-title { font-family: 'Syne', sans-serif; font-weight: 600; font-size: .95rem; color: var(--white); margin-bottom: .5rem; }
+  .prob-body { font-size: .85rem; color: var(--muted); line-height: 1.6; }
+
+  /* ─── CTA ─── */
+  .cta { background: var(--dark); padding: 7rem 5%; text-align: center; border-top: 1px solid var(--gold-line); }
+  .cta h2 { color: var(--white); max-width: 700px; margin: 0 auto .9rem; }
+  .cta .sec-sub { text-align: center; margin: 0 auto 2.5rem; }
+  .cta-row { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+  .cta-note { font-size: .78rem; color: var(--muted-2); margin-top: 1.1rem; }
+
+  /* ─── FOOTER ─── */
+  footer { background: var(--dark-2); border-top: 1px solid var(--gold-line); padding: 2.25rem 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .f-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: .9rem; letter-spacing: .1em; color: var(--muted); text-decoration: none; }
+  .f-logo span { color: var(--gold); }
+  .f-copy { font-size: .75rem; color: var(--muted-2); }
+  .f-link { font-size: .75rem; color: var(--muted-2); text-decoration: none; transition: color .2s; }
+  .f-link:hover { color: var(--gold); }
+
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .55s ease, transform .55s ease; }
+  .fade-up.in { opacity: 1; transform: translateY(0); }
+
+  /* ─── WHO THIS IS FOR ─── */
+  .for-section { background: var(--light-bg); padding: 6rem 5%; border-top: 1px solid var(--border-l); }
+  .for-section .eyebrow { color: #8B6520; }
+  .for-section h2 { color: var(--text-dark); }
+  .for-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+  .for-card { background: #fff; border: 1px solid var(--border-l); border-radius: 10px; padding: 1.6rem; }
+  .for-card.yes { border-left: 3px solid #3A9C6B; }
+  .for-card.no  { border-left: 3px solid #C94040; }
+  .for-card-label { font-size: .68rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 1rem; }
+  .for-card.yes .for-card-label { color: #3A9C6B; }
+  .for-card.no  .for-card-label { color: #C94040; }
+  .for-list { list-style: none; display: flex; flex-direction: column; gap: .55rem; }
+  .for-list li { font-size: .875rem; color: var(--text-mid); display: flex; gap: .5rem; line-height: 1.5; }
+  .for-list.yes li::before { content: '✓'; color: #3A9C6B; font-weight: 700; flex-shrink: 0; }
+  .for-list.no  li::before { content: '✗'; color: #C94040; font-weight: 700; flex-shrink: 0; }
+
+  /* ─── VIDEO ─── */
+  .video-section { background: var(--dark-2); padding: 6rem 5%; border-top: 1px solid var(--gold-line); }
+  .video-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; max-width: 1100px; margin: 0 auto; }
+  .video-frame { background: var(--dark-3); border: 1px solid var(--gold-line); border-radius: 12px; aspect-ratio: 16/9; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; position: relative; overflow: hidden; }
+  .video-frame::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(201,151,58,.06) 0%, transparent 70%); }
+  .play-btn { width: 64px; height: 64px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform .2s, background .2s; position: relative; z-index: 1; }
+  .play-btn:hover { transform: scale(1.08); background: var(--gold-hi); }
+  .play-btn svg { width: 24px; height: 24px; fill: #100C02; margin-left: 3px; }
+  .video-label { font-size: .78rem; color: var(--muted); letter-spacing: .04em; position: relative; z-index: 1; }
+  .video-text h2 { color: var(--white); margin-bottom: .9rem; }
+  .video-text p { font-size: .95rem; color: var(--muted); line-height: 1.75; margin-bottom: 1.25rem; }
+  .video-points { list-style: none; display: flex; flex-direction: column; gap: .55rem; }
+  .video-points li { font-size: .875rem; color: var(--muted); display: flex; gap: .5rem; line-height: 1.5; }
+  .video-points li::before { content: '→'; color: var(--gold); flex-shrink: 0; }
+
+  /* ─── LEAD MAGNET ─── */
+  .lead-mag { background: var(--dark-3); border-top: 1px solid var(--gold-line); padding: 5rem 5%; }
+  .lead-mag-inner { display: flex; align-items: center; justify-content: space-between; gap: 2.5rem; max-width: 900px; flex-wrap: wrap; }
+  .lead-mag-text .eyebrow { margin-bottom: .5rem; }
+  .lead-mag-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.4rem; color: var(--white); margin-bottom: .5rem; line-height: 1.2; }
+  .lead-mag-sub { font-size: .875rem; color: var(--muted); line-height: 1.6; max-width: 460px; }
+  .lead-mag-form { display: flex; gap: .6rem; flex-wrap: wrap; }
+  .lead-mag-form input { background: rgba(255,255,255,.06); border: 1px solid var(--gold-line); border-radius: 5px; padding: .75rem 1rem; color: var(--white); font-size: .875rem; font-family: inherit; outline: none; width: 220px; transition: border-color .2s; }
+  .lead-mag-form input:focus { border-color: var(--gold); }
+  .lead-mag-form input::placeholder { color: var(--muted-2); }
+
+  /* ─── FAQ ─── */
+  .faq { background: var(--dark); padding: 6.5rem 5%; border-top: 1px solid var(--gold-line); }
+  .faq-list { max-width: 760px; margin-top: 3rem; display: flex; flex-direction: column; gap: .75rem; }
+  .faq-item { border: 1px solid var(--gold-line); border-radius: 8px; overflow: hidden; }
+  .faq-q { width: 100%; background: rgba(201,151,58,.04); border: none; padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between; cursor: pointer; text-align: left; gap: 1rem; }
+  .faq-q-text { font-family: 'Syne', sans-serif; font-weight: 600; font-size: .95rem; color: var(--white); line-height: 1.3; }
+  .faq-icon { width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--gold-line); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--gold); font-size: .9rem; transition: transform .25s; }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease, padding .3s ease; padding: 0 1.5rem; }
+  .faq-a p { font-size: .88rem; color: var(--muted); line-height: 1.75; padding: 1rem 0; }
+  .faq-item.open .faq-a { max-height: 300px; }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 760px) {
+    .nav-r a:not(.btn) { display: none; }
+    h1 { font-size: clamp(2.2rem, 8vw, 3.2rem); }
+    .proof-bar { flex-direction: column; }
+    .proof-item { border-right: none; border-bottom: 1px solid var(--gold-line); padding: 1rem 1.25rem; }
+    .proof-item:last-child { border-bottom: none; }
+    .proof-story { grid-template-columns: 1fr; }
+    .before-after { grid-template-columns: 1fr; }
+    .for-grid { grid-template-columns: 1fr; }
+    .video-inner { grid-template-columns: 1fr; }
+    .svc-grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; gap: 2rem; }
+    .price-grid { grid-template-columns: 1fr; }
+    .prob-grid { grid-template-columns: 1fr; }
+    .lead-mag-inner { flex-direction: column; align-items: flex-start; }
+    .lead-mag-form { flex-direction: column; }
+    .lead-mag-form input { width: 100%; }
+    .hero { padding: 8rem 5% 4rem; }
+    .hero-ctas { flex-direction: column; align-items: flex-start; }
+    .btn-ghost { width: 100%; text-align: center; }
+    .btn-gold-lg { width: 100%; text-align: center; }
+    .cta-row { flex-direction: column; align-items: center; }
+    footer { flex-direction: column; text-align: center; }
+    .faq-list { margin-top: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#">STAR<span>STRUX</span> AI</a>
+  <div class="nav-r">
+    <a href="#proof">Case Study</a>
+    <a href="#services">Services</a>
+    <a href="#pricing">Pricing</a>
+    <a href="https://cal.com/starstrux-ai/free-consultation-call" class="btn btn-gold">Book a Call</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+
+  <div class="pill"><div class="pill-dot"></div> AI Automation for Property Management Firms</div>
+
+  <h1>Your back office<br>runs in <em>20 minutes.</em><br>Not 8 hours.</h1>
+
+  <p class="hero-sub">
+    STARSTRUX AI builds custom automation systems that eliminate the manual work eating your team's time — utility bills, maintenance requests, AP processing, owner reporting, and more. We build it, integrate it, and train your team to run it confidently. No new software. No extra headcount.
+  </p>
+
+  <div class="hero-ctas">
+    <a href="#cta" class="btn btn-gold-lg">Book a Free Strategy Call</a>
+    <a href="#services" class="btn btn-ghost">See What We Build</a>
+  </div>
+
+  <div class="proof-bar">
+    <div class="proof-item">
+      <div class="proof-num">250+</div>
+      <div class="proof-label">Utility bills automated monthly</div>
+    </div>
+    <div class="proof-item">
+      <div class="proof-num">8h → 20m</div>
+      <div class="proof-label">Bill processing time</div>
+    </div>
+    <div class="proof-item">
+      <div class="proof-num">$17K+</div>
+      <div class="proof-label">Net annual savings, typical firm</div>
+    </div>
+    <div class="proof-item">
+      <div class="proof-num">3.4×</div>
+      <div class="proof-label">ROI on retainer cost</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMS -->
+<section class="problems" id="problems">
+  <div class="eyebrow">The Problem</div>
+  <h2>Your team is doing work<br>a system should handle.</h2>
+  <p class="sec-sub" style="color:var(--muted)">You're managing 50–500 units with a lean team. Every hour spent on manual admin is an hour not spent on tenants, owners, or growing the portfolio.</p>
+
+  <div class="prob-grid">
+    <div class="prob-card fade-up">
+      <div class="prob-icon">📂</div>
+      <div class="prob-title">250+ Utility Bills a Month</div>
+      <div class="prob-body">Separate logins, separate portals, each bill downloaded by hand. Someone spends a full day just collecting them — before a single dollar gets processed or coded to a property.</div>
+    </div>
+    <div class="prob-card fade-up" style="transition-delay:.08s">
+      <div class="prob-icon">🧾</div>
+      <div class="prob-title">AP & Invoices Done by Hand</div>
+      <div class="prob-body">Vendor invoices arrive by email and paper. Someone reads each one, figures out which property it belongs to, codes it, and enters it into Yardi or Buildium. Every. Single. One.</div>
+    </div>
+    <div class="prob-card fade-up" style="transition-delay:.16s">
+      <div class="prob-icon">🔧</div>
+      <div class="prob-title">Maintenance Requests Falling Through</div>
+      <div class="prob-body">Requests come in by text, email, and phone. Some get logged, some don't. Tenants follow up. Contractors go unnotified. Every gap is a liability and a bad review in the making.</div>
+    </div>
+    <div class="prob-card fade-up" style="transition-delay:.24s">
+      <div class="prob-icon">📊</div>
+      <div class="prob-title">Owner Reports Built by Hand</div>
+      <div class="prob-body">Pulling monthly financials for each owner takes a full afternoon — every month. Vacancy status, rent collected, maintenance spend, all assembled manually and emailed out one by one.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO THIS IS FOR -->
+<section class="for-section" id="for">
+  <div class="eyebrow">Who This Is For</div>
+  <h2 style="color:var(--text-dark)">Built for one type of company.<br>Not everyone.</h2>
+  <p class="sec-sub" style="color:var(--text-mid)">STARSTRUX AI is purpose-built for property management firms in Ontario. Here's how to know if it's a fit.</p>
+  <div class="for-grid">
+    <div class="for-card yes fade-up">
+      <div class="for-card-label">This is for you if...</div>
+      <ul class="for-list yes">
+        <li>You manage 50–500+ residential or mixed-use units</li>
+        <li>Your team manually processes utility bills, invoices, or maintenance requests</li>
+        <li>You're using Yardi, Buildium, AppFolio, or Breeze — and it still requires manual data entry</li>
+        <li>You've considered hiring someone just to handle back-office admin</li>
+        <li>Month-end reporting takes your team days instead of hours</li>
+        <li>You've had maintenance requests fall through the cracks</li>
+      </ul>
+    </div>
+    <div class="for-card no fade-up" style="transition-delay:.1s">
+      <div class="for-card-label">This is NOT for you if...</div>
+      <ul class="for-list no">
+        <li>You manage fewer than 20 units — the ROI won't justify the build cost yet</li>
+        <li>You're looking for an off-the-shelf software subscription</li>
+        <li>You want to replace your PM software entirely</li>
+        <li>You're not willing to give a team member 2 hours for onboarding and training</li>
+        <li>You need something live in less than a week</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF SECTION -->
+<section class="proof-section" id="proof">
+  <div class="proof-story">
+    <div class="fade-up">
+      <div class="proof-label-tag">Live Build — Ottawa, ON</div>
+      <div class="proof-headline">An Ottawa PM firm. 250+ units.<br>One 8-hour day, every month.</div>
+      <p class="proof-body">
+        An 11-person property management company in Ottawa's Golden Triangle was processing over 250 utility bills manually each month — logging into separate portals per account, downloading PDFs, coding invoices by property, and entering data into Yardi. The process took a full workday. Every month. Without fail.
+      </p>
+      <p class="proof-body">
+        We automated the entire pipeline: bill retrieval via email monitoring, Claude AI-powered PDF extraction, property-level categorization, deduplication, and a Yardi-ready CSV output. The admin now spends 20 minutes reviewing exceptions instead of 8 hours processing everything.
+      </p>
+      <div class="proof-stack">
+        <span class="tag">n8n</span>
+        <span class="tag">Claude AI</span>
+        <span class="tag">Gmail Monitor</span>
+        <span class="tag">Supabase</span>
+        <span class="tag">Yardi Breeze</span>
+        <span class="tag">Service Ottawa</span>
+        <span class="tag">Hydro Ottawa</span>
+      </div>
+    </div>
+
+    <div class="before-after fade-up" style="transition-delay:.15s">
+      <div class="ba-card">
+        <div class="ba-label">Before</div>
+        <div class="ba-stat">8 hrs</div>
+        <div class="ba-desc">monthly bill processing</div>
+        <div class="ba-items">
+          <div class="ba-item">Separate portal login per account</div>
+          <div class="ba-item">Manual PDF download, one by one</div>
+          <div class="ba-item">Hand-coded to property in Yardi</div>
+          <div class="ba-item">Duplicate bills caught manually</div>
+          <div class="ba-item">Frequently missed payment window</div>
+        </div>
+      </div>
+      <div class="ba-card after">
+        <div class="ba-label gold">After</div>
+        <div class="ba-stat gold">20 min</div>
+        <div class="ba-desc">exception review only</div>
+        <div class="ba-items">
+          <div class="ba-item">Bills arrive by email automatically</div>
+          <div class="ba-item">AI extracts data from every PDF</div>
+          <div class="ba-item">Auto-coded and mapped per property</div>
+          <div class="ba-item">Duplicates flagged before entry</div>
+          <div class="ba-item">Yardi CSV ready before Wednesday</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="eyebrow">What We Build</div>
+  <h2 style="color:var(--text-dark)">Six automation systems.<br>One less thing to manage.</h2>
+  <p class="sec-sub" style="color:var(--text-mid)">Each system integrates with your existing stack — Yardi, Buildium, AppFolio, or Breeze. No software replacement. No retraining your team. Just less manual work.</p>
+
+  <div class="svc-grid">
+
+    <div class="svc-card flagship fade-up">
+      <div class="flagship-tag">Flagship Build</div>
+      <div class="svc-num">01 — PROVEN</div>
+      <div class="svc-title">Utility Bill Automation</div>
+      <div class="svc-desc">The system that started it all. Fully automated retrieval, AI extraction, property coding, deduplication, and Yardi import — for every utility bill across your entire portfolio.</div>
+      <ul class="svc-list">
+        <li>Email monitoring for incoming bills (Hydro Ottawa, City of Ottawa, gas)</li>
+        <li>Claude AI PDF extraction — amount, due date, account, property</li>
+        <li>Auto-coded to property and vendor in your PM software</li>
+        <li>Duplicate detection before anything hits Yardi</li>
+        <li>Yardi/Buildium-ready CSV output, every Wednesday</li>
+        <li>Human exception queue for unrecognized bills</li>
+      </ul>
+      <div class="svc-integrations">
+        <span class="svc-int-tag">Yardi Breeze</span>
+        <span class="svc-int-tag">Buildium</span>
+        <span class="svc-int-tag">Service Ottawa</span>
+        <span class="svc-int-tag">Hydro Ottawa</span>
+        <span class="svc-int-tag">Gmail</span>
+      </div>
+    </div>
+
+    <div class="svc-card fade-up" style="transition-delay:.08s">
+      <div class="svc-num">02</div>
+      <div class="svc-title">AP & Invoice Processing</div>
+      <div class="svc-desc">Vendor invoices extracted, matched to properties, coded, and routed for approval — automatically. Contractor Visa receipts reconciled and allocated per unit.</div>
+      <ul class="svc-list">
+        <li>Invoice ingestion via email or upload</li>
+        <li>AI extraction of amounts, vendor, property code</li>
+        <li>PO matching and discrepancy flagging</li>
+        <li>Contractor receipt reconciliation per property</li>
+        <li>Approval routing to the right person</li>
+      </ul>
+      <div class="svc-integrations">
+        <span class="svc-int-tag">Yardi</span>
+        <span class="svc-int-tag">AppFolio</span>
+        <span class="svc-int-tag">QuickBooks</span>
+      </div>
+    </div>
+
+    <div class="svc-card fade-up" style="transition-delay:.16s">
+      <div class="svc-num">03</div>
+      <div class="svc-title">Maintenance Request Workflow</div>
+      <div class="svc-desc">From tenant submission to resolution — every request is logged, triaged by urgency, routed to the right contractor, and followed up until it's closed.</div>
+      <ul class="svc-list">
+        <li>Multi-channel intake (email, SMS, portal form)</li>
+        <li>AI triage and urgency classification</li>
+        <li>Automatic contractor assignment and notification</li>
+        <li>Tenant confirmation and status updates</li>
+        <li>Escalation to staff if unresolved</li>
+        <li>Resolution logging per property</li>
+      </ul>
+      <div class="svc-integrations">
+        <span class="svc-int-tag">Email</span>
+        <span class="svc-int-tag">SMS</span>
+        <span class="svc-int-tag">Yardi</span>
+        <span class="svc-int-tag">Buildium</span>
+      </div>
+    </div>
+
+    <div class="svc-card fade-up" style="transition-delay:.08s">
+      <div class="svc-num">04</div>
+      <div class="svc-title">Tenant Communication AI</div>
+      <div class="svc-desc">24/7 intelligent responses to tenant inquiries — rent questions, lease status, maintenance acknowledgements — without a single staff hour spent in the inbox.</div>
+      <ul class="svc-list">
+        <li>Instant replies to common tenant requests</li>
+        <li>Lease renewal sequences (90/60/30 day triggers)</li>
+        <li>Late rent reminders and follow-up sequences</li>
+        <li>Move-in/move-out workflow automation</li>
+        <li>Escalation routing when human judgment is needed</li>
+      </ul>
+      <div class="svc-integrations">
+        <span class="svc-int-tag">Gmail</span>
+        <span class="svc-int-tag">SMS</span>
+        <span class="svc-int-tag">Yardi</span>
+        <span class="svc-int-tag">Buildium</span>
+      </div>
+    </div>
+
+    <div class="svc-card fade-up" style="transition-delay:.16s">
+      <div class="svc-num">05</div>
+      <div class="svc-title">Leasing & Vacancy Automation</div>
+      <div class="svc-desc">Every lead captured, followed up within minutes, pre-qualified, and booked into your calendar — without your team touching the inbox during the process.</div>
+      <ul class="svc-list">
+        <li>Lead capture from Kijiji, Rentals.ca, and portal emails</li>
+        <li>Automated personalized follow-up within 5 minutes</li>
+        <li>Pre-qualification questions before showing</li>
+        <li>Showing scheduling via Cal.com or Google Calendar</li>
+        <li>Application pipeline tracking per unit</li>
+      </ul>
+      <div class="svc-integrations">
+        <span class="svc-int-tag">Kijiji</span>
+        <span class="svc-int-tag">Rentals.ca</span>
+        <span class="svc-int-tag">Cal.com</span>
+        <span class="svc-int-tag">AppFolio</span>
+      </div>
+    </div>
+
+    <div class="svc-card fade-up" style="transition-delay:.24s">
+      <div class="svc-num">06</div>
+      <div class="svc-title">Owner Reporting</div>
+      <div class="svc-desc">Monthly owner statements, portfolio summaries, and financial snapshots — auto-generated and delivered to every owner's inbox on a fixed schedule.</div>
+      <ul class="svc-list">
+        <li>Automated monthly report generation per owner</li>
+        <li>Rent collected, maintenance spend, vacancy status</li>
+        <li>Portfolio-level financial roll-up</li>
+        <li>Branded PDF delivery to owner email</li>
+        <li>Scheduled for any day of the month you choose</li>
+      </ul>
+      <div class="svc-integrations">
+        <span class="svc-int-tag">Yardi</span>
+        <span class="svc-int-tag">Buildium</span>
+        <span class="svc-int-tag">Gmail</span>
+        <span class="svc-int-tag">QuickBooks</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="eyebrow">The Process</div>
+  <h2>Live in two weeks.<br>No disruption to your operation.</h2>
+  <p class="sec-sub" style="color:var(--muted)">We handle the entire build. You keep running your business.</p>
+
+  <div class="steps">
+    <div class="step fade-up">
+      <div class="step-n">01</div>
+      <div class="step-pill">Week 1</div>
+      <div class="step-title">Discovery Audit</div>
+      <div class="step-body">We map your current workflows — where time is going, what tools you're using, and where the highest-value automation sits. You get a written breakdown whether we work together or not.</div>
+    </div>
+    <div class="step fade-up" style="transition-delay:.1s">
+      <div class="step-n">02</div>
+      <div class="step-pill">Week 1–2</div>
+      <div class="step-title">Custom Build</div>
+      <div class="step-body">We build your automation system from scratch — integrated with Yardi, Buildium, or whatever you're already using. No rip-and-replace. No retraining your team. We work around your stack.</div>
+    </div>
+    <div class="step fade-up" style="transition-delay:.2s">
+      <div class="step-n">03</div>
+      <div class="step-pill">Week 2 & Beyond</div>
+      <div class="step-title">Deploy, Train & Maintain</div>
+      <div class="step-body">Systems go live. We walk your team through every workflow — hands-on training so your staff can monitor, manage, and understand what's running. Then we stay on: monitoring performance, handling edge cases, and shipping one improvement per month.</div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="video-section" id="about">
+  <div class="video-inner">
+    <div class="video-frame fade-up">
+      <div class="play-btn">
+        <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+      </div>
+      <div class="video-label">Meet Zephrin — Founder, STARSTRUX AI</div>
+    </div>
+    <div class="video-text fade-up" style="transition-delay:.15s">
+      <div class="eyebrow">Why We Built This</div>
+      <h2>A message from the founder.</h2>
+      <p>Property management companies are running on lean teams doing the work of twice as many people. The back office is where the time goes — and it doesn't have to.</p>
+      <p>We build systems that give that time back. And we don't hand you a black box — we train your team to understand, run, and trust every workflow we build.</p>
+      <ul class="video-points">
+        <li>Based in Ottawa — we know your market</li>
+        <li>We've built for Yardi Breeze, Buildium, and AppFolio</li>
+        <li>We train your staff, not just your IT person</li>
+        <li>You own everything we build — no vendor lock-in</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="eyebrow">Pricing</div>
+  <h2>Straightforward pricing.<br>Pays for itself in 30–60 days.</h2>
+  <p class="sec-sub" style="color:var(--muted)">A small deposit gets things started. The balance is only due when your system is live and working.</p>
+
+  <div class="price-grid">
+    <div class="price-card fade-up">
+      <div class="price-tier">Starter</div>
+      <div class="price-name">Single Workflow</div>
+      <div class="price-units">50–150 units · 1 automation system</div>
+      <div class="price-amount">$800<span class="price-period">/mo</span></div>
+      <div class="price-build">+ $2,500 one-time build · $500 deposit to start, $2,000 on delivery</div>
+      <ul class="price-features">
+        <li>1 core automation (utility bills, AP, or maintenance)</li>
+        <li>Integration with your existing PM software</li>
+        <li>Human exception queue for edge cases</li>
+        <li>Hands-on team training — we teach you how it works</li>
+        <li>1 workflow improvement per month</li>
+      </ul>
+      <div class="price-roi">Typical ROI: $14,000–$17,000 saved annually vs. $9,600 retainer = 3.4× return</div>
+    </div>
+
+    <div class="price-card featured fade-up" style="transition-delay:.12s">
+      <div class="price-tier">Growth System</div>
+      <div class="price-name">Full Back Office</div>
+      <div class="price-units">150–500+ units · up to 4 automation systems</div>
+      <div class="price-amount">$1,500<span class="price-period">/mo</span></div>
+      <div class="price-build">+ $4,500 one-time build · $1,500 deposit to start, $3,000 on delivery</div>
+      <ul class="price-features">
+        <li>Up to 4 automation systems (utility bills + AP + maintenance + reporting)</li>
+        <li>Full integration with Yardi or Buildium</li>
+        <li>Multi-property, multi-owner architecture</li>
+        <li>Full team training — build, run, and understand every workflow</li>
+        <li>2 workflow improvements per month</li>
+        <li>Dedicated Slack channel with your team</li>
+      </ul>
+      <div class="price-roi">Typical ROI: $25,000–$40,000 saved annually vs. $18,000 retainer = 2–3× return</div>
+    </div>
+  </div>
+</section>
+
+<!-- LEAD MAGNET -->
+<section class="lead-mag">
+  <div class="lead-mag-inner">
+    <div class="lead-mag-text">
+      <div class="eyebrow">Free Resource</div>
+      <div class="lead-mag-title">The 5 PM Workflows You Should<br>Automate First</div>
+      <p class="lead-mag-sub">A free one-page breakdown of the highest-ROI automations for property management firms — with estimated time savings and build cost for each.</p>
+    </div>
+    <div class="lead-mag-form">
+      <input type="email" placeholder="Your work email">
+      <a href="https://cal.com/starstrux-ai/free-consultation-call" class="btn btn-gold" style="padding:.75rem 1.4rem;font-size:.875rem;white-space:nowrap;">Send Me the Guide →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="eyebrow">Common Questions</div>
+  <h2>Straight answers.</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">We already use Yardi / Buildium — doesn't that handle all of this?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a"><p>Yardi and Buildium are great systems of record. But they don't automatically download your utility bills, extract data from vendor PDFs, triage incoming maintenance requests, or compile and email owner reports. All of that still happens manually around the software. We automate the work that happens before and after your PM software — so your team stops being the human middleware between your inbox and your database.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">How much does it actually cost? Can't we just hire a student to do this?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a"><p>A student at $20/hour working 10 hours/week costs $10,400/year — plus training time, sick days, turnover, and mistakes. Our Starter retainer is $9,600/year and the system never calls in sick, doesn't make data entry errors, and runs 24/7. The build cost pays back in under 60 days on average. A student can process bills manually. They can't build a system that processes them automatically forever.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Will this disrupt our current operation while it's being built?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a"><p>No. We build everything in parallel with your existing workflow. Your team keeps doing what they're doing until the system is live and verified. We run the new system alongside the manual process during a testing period, then cut over only when you're confident it's working correctly. You won't experience any gap in operations.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">What happens if something breaks or the system stops working?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a"><p>That's exactly what the monthly retainer covers. We monitor every workflow, get alerted when something fails, and fix it — usually before you notice. Every automation we build also has a human exception queue, so if a bill or invoice can't be processed automatically, it gets flagged for manual review instead of disappearing. Nothing falls through the cracks.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Will my team actually be able to use and understand this?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a"><p>Yes — that's a core part of what we deliver. We don't hand off a black box. Every build includes hands-on training sessions where we walk your staff through exactly what the system does, what to check, how to handle exceptions, and what to do if something looks off. Your team doesn't need to be technical. They just need to know where to look and what to do — and we make sure they do.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="cta">
+  <div class="eyebrow" style="text-align:center">Get Started</div>
+  <h2>Stop paying staff to do work<br>a system handles in 20 minutes.</h2>
+  <p class="sec-sub">Book a free 30-minute strategy call. We'll map out exactly where your team is losing time and what an automation system would look like for your firm. No pitch. No commitment. You leave with a real breakdown either way.</p>
+  <div class="cta-row">
+    <a href="https://cal.com/starstrux-ai/free-consultation-call" class="btn btn-gold-lg">Book Your Free Strategy Call →</a>
+  </div>
+  <p class="cta-note">30 minutes · No commitment · Actionable regardless of next steps</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a class="f-logo" href="#">STAR<span>STRUX</span> AI</a>
+  <span class="f-copy">© 2026 STARSTRUX AI · Ottawa, ON · starstruxai.com</span>
+  <a href="https://starstruxai.com" class="f-link">starstruxai.com</a>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+</script>
+</body>
+</html>
