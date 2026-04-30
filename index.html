@@ -206,7 +206,7 @@
   .video-section { background: var(--dark-2); padding: 6rem 5%; border-top: 1px solid var(--gold-line); }
   .video-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; max-width: 1100px; margin: 0 auto; }
   .video-frame { background: var(--dark-3); border: 1px solid var(--gold-line); border-radius: 12px; aspect-ratio: 16/9; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; position: relative; overflow: hidden; }
-  .video-frame::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(201,151,58,.06) 0%, transparent 70%); }
+  .video-frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
   .play-btn { width: 64px; height: 64px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform .2s, background .2s; position: relative; z-index: 1; }
   .play-btn:hover { transform: scale(1.08); background: var(--gold-hi); }
   .play-btn svg { width: 24px; height: 24px; fill: #100C02; margin-left: 3px; }
@@ -223,10 +223,11 @@
   .lead-mag-text .eyebrow { margin-bottom: .5rem; }
   .lead-mag-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.4rem; color: var(--white); margin-bottom: .5rem; line-height: 1.2; }
   .lead-mag-sub { font-size: .875rem; color: var(--muted); line-height: 1.6; max-width: 460px; }
-  .lead-mag-form { display: flex; gap: .6rem; flex-wrap: wrap; }
-  .lead-mag-form input { background: rgba(255,255,255,.06); border: 1px solid var(--gold-line); border-radius: 5px; padding: .75rem 1rem; color: var(--white); font-size: .875rem; font-family: inherit; outline: none; width: 220px; transition: border-color .2s; }
+  .lead-mag-form { display: flex; flex-direction: column; gap: .6rem; min-width: 280px; }
+  .lead-mag-form input { background: rgba(255,255,255,.06); border: 1px solid var(--gold-line); border-radius: 5px; padding: .75rem 1rem; color: var(--white); font-size: .875rem; font-family: inherit; outline: none; width: 100%; transition: border-color .2s; }
   .lead-mag-form input:focus { border-color: var(--gold); }
   .lead-mag-form input::placeholder { color: var(--muted-2); }
+  .lead-mag-form .lm-submit { width: 100%; text-align: center; }
 
   /* ─── FAQ ─── */
   .faq { background: var(--dark); padding: 6.5rem 5%; border-top: 1px solid var(--gold-line); }
@@ -433,8 +434,10 @@
 <!-- VIDEO -->
 <section class="video-section" id="about">
   <div class="video-inner">
-    <div class="video-frame fade-up" style="background:#000;border-radius:12px;overflow:hidden;aspect-ratio:9/16;max-width:320px;">
-      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/nZ-N8kMrnTA" title="STARSTRUX AI — Founder Message" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;"></iframe>
+    <div class="video-frame fade-up">
+      <video controls preload="metadata" poster="">
+        <source src="founder-video-compressed.mp4" type="video/mp4">
+      </video>
     </div>
     <div class="video-text fade-up" style="transition-delay:.15s">
       <div class="eyebrow">Why We Built This</div>
@@ -617,8 +620,10 @@
       <p class="lead-mag-sub">A free one-page breakdown of the highest-ROI automations for property management firms — with estimated time savings and build cost for each.</p>
     </div>
     <div class="lead-mag-form">
-      <input type="email" placeholder="Your work email">
-      <a href="https://cal.com/starstrux-ai/free-consultation-call" class="btn btn-gold" style="padding:.75rem 1.4rem;font-size:.875rem;white-space:nowrap;">Send Me the Guide →</a>
+      <input type="text" id="lm-name" placeholder="Your name" autocomplete="name">
+      <input type="tel" id="lm-phone" placeholder="Phone number" autocomplete="tel">
+      <input type="email" id="lm-email" placeholder="Your work email" autocomplete="email">
+      <a href="#" class="btn btn-gold lm-submit" style="padding:.75rem 1.4rem;font-size:.875rem;">Send Me the Guide →</a>
     </div>
   </div>
 </section>
@@ -696,6 +701,58 @@
     document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
     if (!isOpen) item.classList.add('open');
   }
+
+  // ─── LEAD MAGNET FORM ───
+  (function() {
+    const SECRET  = '499ff1edf8d7caf0be6672d1f60905ca3fbfa718b52e5e5cf88e17b4d928ddd7';
+    const WEBHOOK = 'https://starstruxai.com/webhook/lead-magnet';
+    const PDF_URL = 'https://starstruxai.com/starstrux-ai-5-workflows.pdf';
+
+    const form   = document.querySelector('.lead-mag-form');
+    if (!form) return;
+    const nameEl  = document.getElementById('lm-name');
+    const phoneEl = document.getElementById('lm-phone');
+    const emailEl = document.getElementById('lm-email');
+    const btn     = form.querySelector('.lm-submit');
+
+    btn.addEventListener('click', async function(e) {
+      e.preventDefault();
+      const name  = (nameEl.value  || '').trim();
+      const phone = (phoneEl.value || '').trim();
+      const email = (emailEl.value || '').trim();
+
+      // Validation
+      let valid = true;
+      [nameEl, phoneEl, emailEl].forEach(el => el.style.borderColor = '');
+      if (!name)                          { nameEl.style.borderColor  = '#C94040'; valid = false; }
+      if (!phone)                         { phoneEl.style.borderColor = '#C94040'; valid = false; }
+      if (!email || !email.includes('@')) { emailEl.style.borderColor = '#C94040'; valid = false; }
+      if (!valid) return;
+
+      btn.textContent = 'Sending…';
+      btn.style.pointerEvents = 'none';
+
+      try {
+        const res = await fetch(WEBHOOK, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-webhook-signature': SECRET
+          },
+          body: JSON.stringify({ name, phone, email })
+        });
+        if (res.ok) {
+          form.innerHTML = '<div style="color:#3A9C6B;font-size:.9rem;padding:.5rem 0;">✓ Guide sent — check your inbox.</div>';
+          setTimeout(() => window.open(PDF_URL, '_blank'), 800);
+        } else {
+          throw new Error('Non-OK response');
+        }
+      } catch {
+        btn.textContent = 'Try Again →';
+        btn.style.pointerEvents = 'auto';
+      }
+    });
+  })();
 </script>
 </body>
 </html>
