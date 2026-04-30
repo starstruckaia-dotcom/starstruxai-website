@@ -742,5 +742,44 @@
     if (!isOpen) item.classList.add('open');
   }
 </script>
-</body>
+<script>
+(function() {
+  const SECRET = '499ff1edf8d7caf0be6672d1f60905ca3fbfa718b52e5e5cf88e17b4d928ddd7';
+  const WEBHOOK = 'https://n8n.starstruxai.com/webhook/lead-magnet';
+  const PDF_URL  = 'https://starstruxai.com/starstrux-ai-5-workflows.pdf';
+
+  const form = document.querySelector('.lead-mag-form');
+  if (!form) return;
+  const input = form.querySelector('input[type="email"]');
+  const btn   = form.querySelector('a');
+
+  btn.addEventListener('click', async function(e) {
+    e.preventDefault();
+    const email = (input.value || '').trim();
+    if (!email || !email.includes('@')) {
+      input.style.borderColor = '#C94040';
+      return;
+    }
+    btn.textContent = 'Sending...';
+    btn.style.pointerEvents = 'none';
+    try {
+      const res = await fetch(WEBHOOK, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-webhook-signature': SECRET
+        },
+        body: JSON.stringify({ email })
+      });
+      if (res.ok) {
+        form.innerHTML = '<div style="color:#3A9C6B;font-size:.85rem;">✓ Guide sent — check your inbox.</div>';
+        setTimeout(() => window.open(PDF_URL, '_blank'), 800);
+      }
+    } catch {
+      btn.textContent = 'Try Again →';
+      btn.style.pointerEvents = 'auto';
+    }
+  });
+})();
+</script></body>
 </html>
